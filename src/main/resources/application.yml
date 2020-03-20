@@ -1,0 +1,76 @@
+server:
+  port: 10801
+spring:
+  application:
+    name: crawler
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+    #    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+    generate-ddl: true
+    open-in-view: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        globally_quoted_identifiers: true
+  datasource:
+    test:
+      database: test
+      version: 5.7
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.2.200:3306/${spring.datasource.test.database}?zeroDateTimeBehavior=CONVERT_TO_NULL&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+
+  redis:
+    port: 6379
+    host: 192.168.2.200
+    database: 10
+    password: 123456
+    timeout: 5000
+    lettuce:
+      poll:
+        max-active: 8
+        min-idle:  0
+        max-idle: 8
+        max-wait: 1000ms
+      shutdown-timeout: 1000ms
+
+
+  jackson:
+    #日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      #格式化输出
+      indent_output: false
+      #忽略无法转换的对象
+      fail_on_empty_beans: false
+    #设置空如何序列化
+    defaultPropertyInclusion: NON_EMPTY
+    deserialization:
+      read_unknown_enum_values_as_null: true
+      #允许对象忽略json中不存在的属性
+      fail_on_unknown_properties: false
+    parser:
+      #允许出现特殊字符和转义符
+      allow_unquoted_control_chars: true
+      #允许出现单引号
+      allow_single_quotes: true
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_ENUMS: true
+    time-zone: GMT+8
+
+
+  devtools:
+    restart:
+      #排除那个目录的文件不需要restart
+      exclude: static/**
+      enabled: false
+  thymeleaf:
+    cache: false
+
