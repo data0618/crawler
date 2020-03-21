@@ -30,112 +30,34 @@ public class UrlFileDownloadUtil {
     /**
      * 传入要下载的图片的url列表，将url所对应的图片下载到本地
      */
-    public void downloadPictures(List<String> urlList, List<String> names) {
-        String baseDir = savePath;
-        URL url = null;
+    public void saveFiles(List<String> urlList, List<String> names) {
 
         for (int i = 0; i < urlList.size(); i++) {
-            try {
-                url = new URL(urlList.get(i));
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setConnectTimeout(3 * 1000);
-                conn.setRequestProperty("Referer", url.getHost());
-                //防止屏蔽程序抓取而返回403错误
-                conn.setRequestProperty("User-Agent", UserAgentConstant.Pc.FIRE_FOX_WINDOWS1);
-                DataInputStream dataInputStream = new DataInputStream(conn.getInputStream());
-                FileOutputStream fileOutputStream = new FileOutputStream(new File(baseDir + names.get(i)));
-
-                byte[] buffer = new byte[1024 * 50];
-                int length;
-
-                while ((length = dataInputStream.read(buffer)) > 0) {
-                    fileOutputStream.write(buffer, 0, length);
-                }
-                log.info("已经下载：" + baseDir + names.get(i));
-                dataInputStream.close();
-                fileOutputStream.close();
-            } catch (MalformedURLException e) {
-               log.error(e.getMessage());
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
+            saveFile(urlList.get(i), names.get(i));
         }
     }
 
-    public void downloadPictures(List<String> urlList) {
-        String baseDir = "E:\\spider\\"; //savePath;
-        URL url = null;
+    public void saveFiles(List<String> urlList) {
 
         for (int i = 0; i < urlList.size(); i++) {
-            try {
-                String[] files = urlList.get(i).split("/");
-                String name = files[files.length - 1];
-                url = new URL(urlList.get(i));
-                //log.info("开始下载："+i);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                conn.setRequestProperty("Referer", url.getHost());
-                conn.setConnectTimeout(3 * 1000);
-                //防止屏蔽程序抓取而返回403错误
-                conn.setRequestProperty("User-Agent", UserAgentConstant.Pc.FIRE_FOX_WINDOWS1);
-                DataInputStream dataInputStream = new DataInputStream(conn.getInputStream());
-                FileOutputStream fileOutputStream = new FileOutputStream(new File(baseDir + name));
-
-                byte[] buffer = new byte[1024 * 50];
-                int length;
-
-                while ((length = dataInputStream.read(buffer)) > 0) {
-                    fileOutputStream.write(buffer, 0, length);
-                }
-                log.info("已经下载：" + baseDir + name);
-                dataInputStream.close();
-                fileOutputStream.close();
-            } catch (MalformedURLException e) {
-                log.error(e.getMessage());
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            }
+            saveFile(urlList.get(i));
         }
     }
 
-    // 下载一张图片
-    public void downloadPicture(String u, String name) {
-        String baseDir = savePath;
-        URL url = null;
+    /**
+     * 下载一张图片
+     * @param u
+     */
+    public void saveFile(String u) {
 
-        try {
-            url = new URL(u);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("Referer", url.getHost());
-            conn.setConnectTimeout(3 * 1000);
-            //防止屏蔽程序抓取而返回403错误
-            conn.setRequestProperty("User-Agent", UserAgentConstant.Pc.FIRE_FOX_WINDOWS1);
-            DataInputStream dataInputStream = new DataInputStream(conn.getInputStream());
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(baseDir + name));
-
-            byte[] buffer = new byte[1024 * 50];
-            int length;
-
-            while ((length = dataInputStream.read(buffer)) > 0) {
-                fileOutputStream.write(buffer, 0, length);
-            }
-            log.info("已经下载：" + baseDir + name);
-            dataInputStream.close();
-            fileOutputStream.close();
-        } catch (MalformedURLException e) {
-            log.error(e.getMessage());
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
-    }
-
-    // 下载一张图片
-    public void downloadPicture(String u) {
-        String baseDir = savePath;
-        URL url = null;
         String[] files = u.split("/");
         String name = files[files.length - 1];
+        saveFile(u, name);
 
+    }
+
+    public void saveFile(String u, String name){
+        URL url = null;
         try {
             url = new URL(u);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -144,7 +66,7 @@ public class UrlFileDownloadUtil {
             //防止屏蔽程序抓取而返回403错误
             conn.setRequestProperty("User-Agent", UserAgentConstant.Pc.FIRE_FOX_WINDOWS1);
             DataInputStream dataInputStream = new DataInputStream(conn.getInputStream());
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(baseDir + name));
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(savePath + name));
 
             byte[] buffer = new byte[1024 * 50];
             int length;
@@ -152,7 +74,7 @@ public class UrlFileDownloadUtil {
             while ((length = dataInputStream.read(buffer)) > 0) {
                 fileOutputStream.write(buffer, 0, length);
             }
-            log.info("已经下载：" + baseDir + name);
+            log.info("已经下载：" + savePath + name);
             dataInputStream.close();
             fileOutputStream.close();
         } catch (MalformedURLException e) {

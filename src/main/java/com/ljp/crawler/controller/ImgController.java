@@ -28,6 +28,9 @@ public class ImgController {
     @Autowired
     MeiZiTuImgProcessor imgProcessor;
 
+    @Autowired
+    private MeiZiTuImgPipeline meiZiTuImgPipeline;
+
     @RequestMapping(
             value = {ImpConstants.MEIZITU},
             method = {RequestMethod.GET}
@@ -41,7 +44,7 @@ public class ImgController {
                 //从"https://github.com/code4craft"开始抓
                 //.addUrl("https://www.tooopen.com/img/88_879_1_2.aspx")
                 .addUrl(url)
-                .addPipeline(new MeiZiTuImgPipeline())
+                .addPipeline(meiZiTuImgPipeline)
                 //.setDownloader(httpClientDownloader)
                 //开启5个线程抓取
                 .thread(5)

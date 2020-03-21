@@ -3,6 +3,7 @@ package com.ljp.crawler.pipeline.img;
 import com.ljp.crawler.util.UrlFileDownloadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
@@ -20,7 +21,11 @@ import java.util.Map;
  * @version: $
  */
 @Slf4j
+@Component
 public class MeiZiTuImgPipeline implements Pipeline {
+
+    @Autowired
+    private UrlFileDownloadUtil urlFileDownloadUtil;
 
     @Override
     public void process(ResultItems resultItems, Task task) {
@@ -29,7 +34,7 @@ public class MeiZiTuImgPipeline implements Pipeline {
 
         if (img instanceof PlainText){
             final List<String> all = ((PlainText) img).all();
-            new UrlFileDownloadUtil().downloadPictures(all);
+            urlFileDownloadUtil.saveFiles(all);
         }
 
 
