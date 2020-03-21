@@ -37,6 +37,7 @@ public class MeiZiTuImgProcessor implements PageProcessor {
 
         // 部分三：从页面发现后续的url地址来抓取
        // page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
+        page.addTargetRequests(page.getHtml().links().regex("(https://www.mzitu.com/\\d+)").all());
     }
 
     @Override
