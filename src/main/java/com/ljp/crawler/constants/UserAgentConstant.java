@@ -15,7 +15,7 @@ public class UserAgentConstant {
         public static final String IE_8_0 = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)";
         public static final String IE_7_0 = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)";
         public static final String IE_6_0 = " Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
-        public static final String FIRE_FOX_MAC = " Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1";
+        public static final String FIRE_FOX_MAC = " Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
         public static final String FIRE_FOX_WINDOWS = "Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1";
         public static final String FIRE_FOX_WINDOWS1 = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0";
         public static final String OPERA_11_11_MAC = "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11";

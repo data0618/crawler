@@ -10,7 +10,6 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.selector.PlainText;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,9 +22,8 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class MeiZiTuImgPipeline implements Pipeline {
-
-    @Value("${file.meizitu.savePath}")
+public class ZhiHuImgPipeline implements Pipeline {
+    @Value("${file.zhihu.savePath}")
     private String savePath;
 
     @Autowired

@@ -23,24 +23,20 @@ import java.util.List;
 @Component
 public class UrlFileDownloadUtil {
 
-
-    @Value("${file.savePath}")
-    private String savePath;
-
     /**
      * 传入要下载的图片的url列表，将url所对应的图片下载到本地
      */
-    public void saveFiles(List<String> urlList, List<String> names) {
+    public void saveFiles(List<String> urlList, List<String> names, String savePath) {
 
         for (int i = 0; i < urlList.size(); i++) {
-            saveFile(urlList.get(i), names.get(i));
+            saveFile(urlList.get(i), names.get(i), savePath);
         }
     }
 
-    public void saveFiles(List<String> urlList) {
+    public void saveFiles(List<String> urlList, String savePath) {
 
         for (int i = 0; i < urlList.size(); i++) {
-            saveFile(urlList.get(i));
+            saveFile(urlList.get(i), savePath);
         }
     }
 
@@ -48,15 +44,15 @@ public class UrlFileDownloadUtil {
      * 下载一张图片
      * @param u
      */
-    public void saveFile(String u) {
+    public void saveFile(String u, String savePath) {
 
         String[] files = u.split("/");
         String name = files[files.length - 1];
-        saveFile(u, name);
+        saveFile(u, name, savePath);
 
     }
 
-    public void saveFile(String u, String name){
+    public void saveFile(String u, String name, String savePath){
         URL url = null;
         try {
             url = new URL(u);

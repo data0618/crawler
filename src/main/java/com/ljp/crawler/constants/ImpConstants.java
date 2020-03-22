@@ -10,4 +10,5 @@ package com.ljp.crawler.constants;
 public class ImpConstants {
     public static final String LIST = "img/list";
     public static final String MEIZITU = "img/mzitu";
+    public static final String ZHIHU = "img/zhihu";
 }

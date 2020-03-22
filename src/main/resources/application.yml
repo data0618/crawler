@@ -75,4 +75,7 @@ spring:
     cache: false
 #存储位置
 file:
-  savePath: E:\\spider\\
+  meizitu:
+    savePath: E:\\spider\\meizitu\\
+  zhihu:
+    savePath: E:\\spider\\zhihu\\
